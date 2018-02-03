@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link active">Select Crocery Category
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item" *ngFor="let crocery of croceries">
+          <a [routerLink]="['/categories/view/',crocery.code]">
+            <span class="badge">{{crocery.code}}</span> {{crocery.description}}
+          </a>
+
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <router-outlet></router-outlet>
+
+
+</div>
