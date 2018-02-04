@@ -8,7 +8,7 @@ const routes: Routes = [
         path: 'categories', component: CategoryComponent,
         children: [
             {path: "", redirectTo: 'categories', pathMatch:"full"},
-            { path: "view/:code", component: ViewCategoryComponent },
+            { path: "view/:id", component: ViewCategoryComponent },
         ]
     }
 ];

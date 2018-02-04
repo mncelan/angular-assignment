@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     CategoryModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryCategoryService, { dataEncapsulation: false, passThruUnknownUrl: true }
+      InMemoryCategoryService, { dataEncapsulation: false }
     )
 
   ],

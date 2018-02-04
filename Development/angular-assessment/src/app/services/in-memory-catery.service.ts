@@ -13,17 +13,17 @@ export class InMemoryCategoryService  implements InMemoryDbService {
      */
     createDb() {
       const croceries = [
-        { code: 1,
+        { id: 1,
         description: 'Kitchen Items' },
-        { code: 2,
+        { id: 2,
            description: 'Cosmetics' },
-        { code: 3,
+        { id: 3,
            description: 'Cleaning' },
-        { code: 4,
+        { id: 4,
            description: 'Toiletries' },
-        { code: 5,
+        { id: 5,
            description: 'Clothing' },
-        { code: 6, description: 'Fruits and Veg'
+        { id: 6, description: 'Fruits and Veg'
        },
        
       ];

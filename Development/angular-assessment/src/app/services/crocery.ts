@@ -1,4 +1,7 @@
 export class Crocery {
-    code: number;
+    id: number;
     description: string;
+
+    //to add items added by user
+    items:Array<any>;
 }

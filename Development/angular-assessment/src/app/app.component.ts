@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { CroceryService } from './services/crocery.service';
 import { Crocery } from "./services/crocery";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class AppComponent {
 
   croceries: Crocery[] = [];
 
-  constructor(private croceryService: CroceryService) { }
+  constructor(private croceryService: CroceryService, private router: Router) { }
 
   ngOnInit() {
 
@@ -27,8 +28,4 @@ export class AppComponent {
       console.log("Getting groceries");
     });
   }
-
-
-
-
 }

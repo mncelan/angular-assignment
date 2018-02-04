@@ -1,10 +1,33 @@
 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+    <h2>{{ crocery?.description }} </h2>
+    <div class="d-flex flex-row-reverse">
+        <a class="p-2" href="javascript:void(0)" title="deleting this category, can't be undone" (click)="deleteCategory()">Delete Category</a>
 
+    </div>
+  
+    <input-comp (addRowEvent)="addRow($event)" [editing]="editableItem" (editRowEvent)="edit($event)"></input-comp>
 
-    <h1>View Categories</h1>
-    <!-- <div *ngIf="category"> -->
-        <h2>{{ croceryData?.description | uppercase }} Details</h2>
-        <div>
-            <span>code: </span>{{croceryData?.code}}</div>
-    <!-- </div> -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items; let index=index;">
+                <td>{{item.item}} </td>
+                <td>{{item.quantity}} </td>
+                <td>{{item.price}} </td>
+                <td>
+                    <button class="btn btn-primary mb-2" title="edit item" (click)="doEdit(index)">Edit</button>
+                    <button class="btn btn-primary mb-2" title="delete item" (click)="delete(index)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary mb-2" (click)="save()" [disabled]="!canSave">Save</button>
 </main>

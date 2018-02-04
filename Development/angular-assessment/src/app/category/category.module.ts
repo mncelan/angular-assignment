@@ -4,14 +4,20 @@ import {ViewCategoryComponent} from "./view-category/view-category.component";
 import {CategoryComponent} from "./category.component";
 import {CategoryRoutingModule} from "./category-routing.module";
 
+import {InputComponent} from "../input.component";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+
 @NgModule({
     imports:[
         CommonModule,
-        CategoryRoutingModule
+        CategoryRoutingModule,
+        ReactiveFormsModule,
+        FormsModule
     ],
     declarations:[
         CategoryComponent,
-        ViewCategoryComponent
+        ViewCategoryComponent,
+        InputComponent
     ]
 })
 export class CategoryModule{
