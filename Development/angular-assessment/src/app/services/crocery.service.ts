@@ -43,7 +43,7 @@ export class CroceryService {
   }
 
   /** PUT: insert crocery */
-  updateHero(crocery: Crocery): Observable<Crocery> {
+  updateCrocery(crocery: Crocery): Observable<Crocery> {
     return this.http.put<Crocery>(this.croceryUrl, crocery, httpOptions)
       
   }

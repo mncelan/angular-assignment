@@ -32,22 +32,19 @@ import { EventEmitter } from "@angular/core";
 })
 export class InputComponent {
 
-   formGroup: FormGroup;
+    formGroup: FormGroup;
     @Output() addRowEvent: EventEmitter<any>;
-    //we need to know idex we editing and updated item
+    //we need to know index we editing and updated item
     @Output() editRowEvent: EventEmitter<{ index: number, item: any }>;
 
-    //using get/set so I can trakc changes to the @input since the parent container has the array of items captured by child
-    //could have used a service or expanded element to manage it's self, but wanted to expirement with other ideas
+    //using get/set so I can track changes to the @input since the parent container has the array of items captured by child
+    //could have used a service or expanded element to manage itself, but wanted to expirement with other ideas
     private _editing: { index: number, item: any } = null;
     @Input() set editing(item: { index: number, item: any }) {
         this._editing = item;
-        if( this._editing != undefined && this._editing != null ){
+        if (this._editing != undefined && this._editing != null) {
             this.formGroup.patchValue(this._editing.item);
         }
-    }
-    get editing() {
-        return this._editing;
     }
 
     constructor(private formBuilder: FormBuilder) {
@@ -72,6 +69,9 @@ export class InputComponent {
         this.editRowEvent.emit({ index: this._editing.index, item: this.formGroup.value });
         this.formGroup.reset();
 
+    }
+    get editing() {
+        return this._editing;
     }
 
 }

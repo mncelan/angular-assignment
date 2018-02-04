@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { NgForm, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
 
 import { Crocery } from "../../services/crocery";
 import { CroceryService } from "../../services/crocery.service";
@@ -22,8 +23,11 @@ export class ViewCategoryComponent {
     canSave: boolean = false;
     editableItem: { index: number, item: any };
 
-    constructor(private activateRoute: ActivatedRoute, private router: Router,
-        private croceryService: CroceryService, private formBuilder: FormBuilder) { }
+    constructor(private activateRoute: ActivatedRoute,
+        private router: Router,
+        private croceryService: CroceryService,
+        private location: Location,
+        private formBuilder: FormBuilder) { }
 
     ngOnInit() {
 
@@ -39,20 +43,6 @@ export class ViewCategoryComponent {
             this.canSave = (this.formArray.valid && this.formArray.length > 0) ? true : false;
         });
     }
-//Adding items to a table row
-    addRow(rowData: any) {
-        let formGroup: FormGroup = this.formBuilder.group({
-            item: [null, [Validators.required]],
-            quantity: [null, [Validators.required]],
-            price: [null]
-        });
-        formGroup.patchValue(rowData);
-        this.formArray.push(formGroup);
-        console.debug("logic to add row, item >> ", formGroup.value, " values >>", this.formArray.value);
-
-        this.items = this.formArray.value;
-
-    }
 
     getCategoryByID(id: number) {
         console.debug("find category by id", id);
@@ -62,18 +52,6 @@ export class ViewCategoryComponent {
             this.crocery = crocery;
 
         });
-    }
-
-    save() {
-        if (this.formArray.valid && this.formArray.length > 0) {
-            console.debug("saving items >>", this.formArray.value);
-            this.crocery.items = this.formArray.value;
-
-            this.croceryService.updateHero(this.crocery).subscribe(crocery => {
-                console.debug("saved", crocery);
-            });
-
-        }
     }
 
     delete(index: number): void {
@@ -121,5 +99,35 @@ export class ViewCategoryComponent {
         }
         //TODO:refresh the nav bar when deleting a category
 
+    }
+
+    save() {
+        if (this.formArray.valid && this.formArray.length > 0) {
+            console.debug("saving items >>", this.formArray.value);
+            this.crocery.items = this.formArray.value;
+
+            this.croceryService.updateCrocery(this.crocery).subscribe(() =>
+                this.goBack());
+
+        }
+
+    }
+
+    //Adding items to a table row
+    addRow(rowData: any) {
+        let formGroup: FormGroup = this.formBuilder.group({
+            item: [null, [Validators.required]],
+            quantity: [null, [Validators.required]],
+            price: [null]
+        });
+        formGroup.patchValue(rowData);
+        this.formArray.push(formGroup);
+        console.debug("logic to add row, item >> ", formGroup.value, " values >>", this.formArray.value);
+
+        this.items = this.formArray.value;
+
+    }
+    goBack(): void {
+        this.location.back();
     }
 }
